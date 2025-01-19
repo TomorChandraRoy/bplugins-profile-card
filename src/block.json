@@ -1,0 +1,90 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "b-blocks/profile-card",
+  "version": "1.0.0",
+  "title": "Profile Card",
+  "category": "widgets",
+  "description": "Short description of the Profile-Card ",
+  "keywords": ["Profile","Card"],
+  "textdomain": "b-blocks",
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "name": {
+      "type": "string",
+      "default": "Sarah Anderson"
+    },
+    "nameStyle":{
+      "type":"object",
+      "default":{
+        "NameColor": "#64f051",
+        "NameTag": "h2"
+      }
+    },
+    "title": {
+      "type": "string",
+      "default": "Senior Product Designer"
+    },
+    "titleStyle":{
+      "type":"object",
+      "default":{
+        "titleColor": "#2b302b",
+        "titleTag": "p"
+      }
+    },
+    "bio": {
+      "type": "string",
+      "default": "Creative designer with 5+ years of experience in digital product design and brand identity."
+    },
+    "bioStyle":{
+      "type":"object",
+      "default":{
+        "bioColor": "#64f051",
+        "bioTag": "p"
+      }
+    },
+    "stats": {
+      "type": "array",
+      "default": [
+        { "label": "Projects", "value": "1.2k" },
+        { "label": "Followers", "value": "8.5k" },
+        { "label": "Following", "value": "4.7k" }
+      ]
+    },
+    "skills": {
+      "type": "array",
+      "default": ["UI/UX", "Branding", "Motion"]
+    },
+    "buttonOneText": {
+      "type": "string",
+      "default": "Follow"
+    },
+    "buttonTwoText": {
+      "type": "string",
+      "default": "Message"
+    },
+    "buttonOneStyle": {
+      "type": "string",
+      "default": "primary"
+    },
+    "buttonTwoStyle": {
+      "type": "string",
+      "default": "secondary"
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  },
+  "example": {
+    "attributes": {}
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}
