@@ -8,11 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	const blockNameEls = document.querySelectorAll('.wp-block-b-blocks-profile-card');
 	blockNameEls.forEach(blockNameEl => {
 		const attributes = JSON.parse(blockNameEl.dataset.attributes);
-		const { stats,bio,title,name,skills} = attributes;
-		createRoot(blockNameEl).render(<>
-			<Style attributes={attributes} id={blockNameEl.id} />
 
-         <ProfileCard stats={stats} bio={bio} title={title} name={name} skills={skills}></ProfileCard>
+
+		createRoot(blockNameEl).render(<>
+
+		<Style attributes={attributes} id={blockNameEl.id} />
+
+         <ProfileCard attributes={attributes}></ProfileCard>
 		</>);
 
 		blockNameEl?.removeAttribute('data-attributes');

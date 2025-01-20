@@ -24,17 +24,14 @@ const ProfileCard = ({
   setAttributes
 }) => {
   const {
-    stats,
-    bio,
-    title,
     name,
-    skills,
     nameStyle,
-    buttonOneText,
-    buttonTwoText
+    profiles
   } = attributes;
   const TagName = nameStyle.NameTag || "span";
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("body", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, profiles.map((profile, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("body", {
+    key: index
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "profile-card"
@@ -44,18 +41,16 @@ const ProfileCard = ({
     className: "avatar-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "avatar"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "avatar-inner"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "avatar-glow"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "avatar-border"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    className: "avatarImg",
+    src: profile.img,
+    alt: profile.name
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "profile-info"
   }, isSelected ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
     className: "name",
     tagName: nameStyle.NameTag,
-    value: name,
+    value: profile.name,
     onChange: NewName => {
       setAttributes({
         name: NewName
@@ -65,40 +60,36 @@ const ProfileCard = ({
     className: "name"
   }, name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "title"
-  }, title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, profile.title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "stats"
-  }, stats.map((data, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, profile.stats.map((stat, i) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "stat",
-    key: index
+    key: i
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "stat-value"
-  }, data?.value), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, stat.value), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "stat-label"
-  }, data?.label))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, stat.label)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bio"
-  }, bio), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, profile.bio), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "skills"
-  }, skills.map((data, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: index
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "skill"
-  }, data)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, profile.skills.map((skill, i) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "skill",
+    key: i
+  }, skill))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "actions"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "action-btn primary"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, buttonOneText), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, profile.buttons.map((button, i) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    key: i,
+    className: `action-btn ${button.type}`
+  }, button.label, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "btn-effect"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "action-btn secondary"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, buttonTwoText), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "btn-effect"
-  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "card-shine"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "card-border"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "card-glow"
-  })))));
+  }))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileCard);
 
@@ -121,12 +112,64 @@ const Style = ({
   attributes,
   id
 }) => {
-  console.log(attributes, id);
+  const {
+    nameStyle,
+    titleStyle,
+    statsStyle
+  } = attributes;
+  const {
+    NameColor
+  } = nameStyle;
+  const {
+    titleColor,
+    titleSize
+  } = titleStyle;
+  const {
+    labelColor,
+    labelSize,
+    valueColor,
+    valueSize
+  } = statsStyle;
+
+  // console.log("dy",labelColor,labelSize,valueColor,valueSize);
+  //   console.log(titleSize);
+
+  // console.log(nameStyle);
+
+  const mainSl = `#${id}`;
+  const profileInfo = `${mainSl} .profile-info`;
+  const name = `${profileInfo} .name`;
+  const title = `${profileInfo} .title`;
+  const Stats = `${mainSl} .stats`;
+  const stat = `${Stats} .stat`;
+  const statValue = `${stat} .stat-value`;
+  const statlabel = `${Stats} .stat-label`;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
     dangerouslySetInnerHTML: {
       __html: `
-	
-		  `
+	${name}{
+            background:${NameColor};
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+	}
+	${title}{
+	color:${titleColor};
+	font-size:${titleSize};
+	}
+	${statlabel}{
+	color:${labelColor};
+	font-size:${labelSize};
+	}
+	${statValue}{
+	color:${valueColor};
+	font-size:${valueSize};
+	}
+
+
+
+    `
     }
   });
 };
@@ -296,22 +339,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const blockNameEls = document.querySelectorAll('.wp-block-b-blocks-profile-card');
   blockNameEls.forEach(blockNameEl => {
     const attributes = JSON.parse(blockNameEl.dataset.attributes);
-    const {
-      stats,
-      bio,
-      title,
-      name,
-      skills
-    } = attributes;
     (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(blockNameEl).render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_Common_Style__WEBPACK_IMPORTED_MODULE_3__["default"], {
       attributes: attributes,
       id: blockNameEl.id
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_Common_ProfileCard__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      stats: stats,
-      bio: bio,
-      title: title,
-      name: name,
-      skills: skills
+      attributes: attributes
     })));
     blockNameEl?.removeAttribute('data-attributes');
   });

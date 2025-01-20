@@ -3,40 +3,49 @@ import {
   ColorPalette,
   FontSizePicker,
   PanelBody,
-  RangeControl,
   SelectControl,
   __experimentalBoxControl as BoxControl,
   __experimentalUnitControl as UnitControl,
+
 } from "@wordpress/components";
 import {} from "../../../../../../bpl-tools/Components";
 
 const Style = ({ attributes, setAttributes }) => {
-  // const {} = attributes;
+  const { nameStyle,titleStyle,statsStyle} = attributes;
+  const {NameColor,NameTag}= nameStyle;
+  const {titleColor,titleSize}= titleStyle;
+  const {labelColor,labelSize,valueColor,valueSize}= statsStyle;
+
+
+  
+
+  console.log(labelColor,labelSize,valueColor,valueSize);
+  
 
   return (
     <>
       <PanelBody
         className="bPlPanel"
-        title={__("Slider Header Styles ", "b-blocks")}
+        title={__("Profile Styles ", "b-blocks")}
         initialOpen={false}
       >
-        <h5>{__("Header Color:", "b-blocks")}</h5>
+
+
+        <h3>{__("Name Color:", "b-blocks")}</h3>
         <ColorPalette
-          value={"" || ""}
-          onChange={(value) => {
-            setAttributes({SliderNameColor: value});
+          value={NameColor || ""}
+          onChange={(color) => {
+            setAttributes({ nameStyle:{...nameStyle, NameColor: color} });
           }}
         />
-
         <SelectControl
-          label={__("Header Select Tag : ")}
-          value={""}
+          label={__("Name Tag : ")}
+          value={NameTag}
           onChange={(tag) => {
-            setAttributes({SliderNameTag: tag});
+            setAttributes({ nameStyle:{...nameStyle, NameTag: tag }});
           }}
           options={[
             { value: null, label: "Select a User", disabled: true },
-            { value: "h1", label: "H1" },
             { value: "h2", label: "H2" },
             { value: "h3", label: "H3" },
             { value: "h4", label: "H4" },
@@ -44,21 +53,16 @@ const Style = ({ attributes, setAttributes }) => {
             { value: "h6", label: "H6" },
           ]}
         />
-      </PanelBody>
 
-      <PanelBody
-        className="bPlPanelBody2"
-        title={__("Description Color Styles ", "b-blocks")}
-        initialOpen={false}
-      >
-        <h5>{__("Description Color:", "b-blocks")}</h5>
+      <h3>{__("Title Color:", "b-blocks")}</h3>
         <ColorPalette
-          value={"" || ""}
-          onChange={(value) => {
-            setAttributes({descriptionColor: value});
+          value={titleColor}
+          onChange={(color) => {
+            setAttributes({ titleStyle:{...titleStyle, titleColor: color }});
           }}
         />
-        <h5>{__("Description font Size:", "b-blocks")}</h5>
+
+       <h3>{__("Title Size:", "b-blocks")}</h3>
         <FontSizePicker
           fontSizes={[
             {
@@ -78,51 +82,61 @@ const Style = ({ attributes, setAttributes }) => {
             },
           ]}
           onChange={(size) => {
-            setAttributes({ descriptionFontSize: size 
-            });
+            setAttributes({ titleStyle:{...titleStyle, titleSize: size }});
           }}
-          value={""}
+          value={titleSize}
         />
       </PanelBody>
 
-      <PanelBody
-        className="bPlPanelBody"
-        title={__("Slider Effect", "b-blocks")}
-        initialOpen={false}
-      >
-        <SelectControl
-          // fade,coverflow,flip,creative,cards
-          value={""}
-          onChange={(eff) => setAttributes({ SliderEffect: eff })}
-          options={[
-            { value: null, label: "Select a Effect", disabled: true },
-            { value: "", label: "Default" },
-            { value: "coverflow", label: "Cover flow" },
-            { value: "cards", label: "Cards" },
+      <PanelBody title={__("Stats Style", "b-blocks")} initialOpen={false}>
+        
+        {/* Label Color */}
+        <h3>{__("Label Color:", "b-blocks")}</h3>
+        <ColorPalette
+          value={labelColor}
+          onChange={(color) => {
+            setAttributes({ statsStyle: { ...statsStyle, labelColor: color } });
+          }}
+        />
+        
+        {/* Label Size */}
+        <h3>{__("Label Size:", "b-blocks")}</h3>
+        <FontSizePicker
+          fontSizes={[
+            { name: "Small", size: 12, slug: "small" },
+            { name: "Normal", size: 16, slug: "normal" },
+            { name: "Big", size: 26, slug: "big" },
           ]}
+          onChange={(size) => {
+            setAttributes({ statsStyle: { ...statsStyle, labelSize: size } });
+          }}
+          value={labelSize}
+        />
+        
+        {/* Value Color */}
+        <h3>{__("Value Color:", "b-blocks")}</h3>
+        <ColorPalette
+          value={valueColor}
+          onChange={(color) => {
+            setAttributes({ statsStyle: { ...statsStyle, valueColor: color } });
+          }}
+        />
+        
+        {/* Title Size */}
+        <h3>{__("Value Size:", "b-blocks")}</h3>
+        <FontSizePicker
+          fontSizes={[
+            { name: "Small", size: 12, slug: "small" },
+            { name: "Normal", size: 16, slug: "normal" },
+            { name: "Big", size: 26, slug: "big" },
+          ]}
+          onChange={(size) => {
+            setAttributes({ statsStyle: { ...statsStyle, valueSize: size } });
+          }}
+          value={valueSize}
         />
       </PanelBody>
 
-      <PanelBody
-        title={__("Background Opacity", "b-blocks")}
-        initialOpen={false}
-      >
-        <RangeControl
-          label={__("Opacity", "b-blocks")}
-          value={""}
-          onChange={(value) => setAttributes({ slidersOpacity: value })}
-          min={0}
-          max={1}
-          step={0.1}
-        />
-      </PanelBody>
-      <PanelBody title={__("Border Radius", "b-blocks")} initialOpen={false}>
-        <BoxControl
-          label="Border Radius"
-          values={""}
-          onChange={(Value) => setAttributes({ SliderRedius: Value })}
-        />
-      </PanelBody>
 
       <PanelBody title={__("Slider Size", "b-blocks")} initialOpen={false}>
         <UnitControl
@@ -137,19 +151,14 @@ const Style = ({ attributes, setAttributes }) => {
         />
       </PanelBody>
 
-      <PanelBody
-        title={__("Sliders Image Control", "b-blocks")}
-        initialOpen={true}
-      >
-        <RangeControl
-          label={__("Sliders Control Image ", "b-blocks")}
-          value={""}
-          onChange={(value) => setAttributes({ slidersControl: value })}
-          min={1}
-          max={4}
-          step={1}
+      <PanelBody title={__("Border Radius", "b-blocks")} initialOpen={false}>
+        <BoxControl
+          label="Border Radius"
+          values={""}
+          onChange={(Value) => setAttributes({ SliderRedius: Value })}
         />
       </PanelBody>
+
     </>
   );
 };

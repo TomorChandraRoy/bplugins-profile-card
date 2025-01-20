@@ -13,32 +13,44 @@
       "type": "string",
       "default": "center"
     },
-    "name": {
-      "type": "string",
-      "default": "Sarah Anderson"
+"profiles": {
+      "type": "array",
+      "default": [
+        {
+          "name": "Sarah Anderson",
+          "img": "https://cdn.pixabay.com/photo/2023/04/05/09/44/landscape-7901065_1280.jpg",
+          "bio": "Creative designer with 5+ years of experience in digital product design and brand identity.",
+          "title": "Senior Product Designer",
+          "stats": [
+            { "label": "Projects", "value": "1.2k" },
+            { "label": "Followers", "value": "8.5k" },
+            { "label": "Following", "value": "4.7k" }
+          ],
+          "skills": ["UI/UX", "Branding", "Motion"],
+          "buttons": [
+            {"type":"primary", "label": "Follow" },
+            {"type":"secondary", "label": "Message" }
+          ]
+        }
+      ]
     },
+
     "nameStyle":{
       "type":"object",
       "default":{
-        "NameColor": "#64f051",
+        "NameColor":"#a78bfa",
         "NameTag": "h2"
       }
     },
-    "title": {
-      "type": "string",
-      "default": "Senior Product Designer"
-    },
+
     "titleStyle":{
       "type":"object",
       "default":{
-        "titleColor": "#2b302b",
-        "titleTag": "p"
+        "titleColor": "#94a3b8",
+        "titleSize": "16px"
       }
     },
-    "bio": {
-      "type": "string",
-      "default": "Creative designer with 5+ years of experience in digital product design and brand identity."
-    },
+
     "bioStyle":{
       "type":"object",
       "default":{
@@ -46,26 +58,17 @@
         "bioTag": "p"
       }
     },
-    "stats": {
-      "type": "array",
-      "default": [
-        { "label": "Projects", "value": "1.2k" },
-        { "label": "Followers", "value": "8.5k" },
-        { "label": "Following", "value": "4.7k" }
-      ]
+ 
+    "statsStyle": {
+      "type": "object",
+      "default": {
+        "labelColor": "#94a3b8", 
+        "labelSize": "13px",  
+        "valueColor": "#60a5fa", 
+        "valueSize": "20px" 
+      }
     },
-    "skills": {
-      "type": "array",
-      "default": ["UI/UX", "Branding", "Motion"]
-    },
-    "buttonOneText": {
-      "type": "string",
-      "default": "Follow"
-    },
-    "buttonTwoText": {
-      "type": "string",
-      "default": "Message"
-    },
+  
     "buttonOneStyle": {
       "type": "string",
       "default": "primary"
